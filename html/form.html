@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Contacto</title>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .input-group-text i {
+      margin-right: 5px;
+    }
+    /* Estilo para ocultar la tabla por defecto */
+    #contactsTableContainer {
+      display: none;
+    }
+    /* Estilo para el formulario en formato de cuadrícula */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .form-row .form-group {
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center">Formulario de Contacto</h2>
+    <form id="contactForm" action="/guardar" method="post">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombres">Nombres:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <input
+              type="text"
+              id="nombres"
+              name="nombres"
+              class="form-control"
+              placeholder="Nombres"
+              pattern="[a-zA-Z ]+"
+              title="Ingrese solo letras y espacios"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="apellidos">Apellidos:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <input
+              type="text"
+              id="apellidos"
+              name="apellidos"
+              class="form-control"
+              placeholder="Apellidos"
+              pattern="[a-zA-Z ]+"
+              title="Ingrese solo letras y espacios"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="dni">DNI:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+            <input
+              type="text"
+              id="dni"
+              name="dni"
+              class="form-control"
+              placeholder="DNI"
+              pattern="[0-9]{8}"
+              title="El DNI debe contener exactamente 8 dígitos"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Número de Teléfono:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              class="form-control"
+              placeholder="Número de Teléfono"
+              pattern="[0-9]{9}"
+              title="El número de teléfono debe contener exactamente 9 dígitos"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="direccion">Dirección:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-home"></i></span>
+            <input
+              type="text"
+              id="direccion"
+              name="direccion"
+              class="form-control"
+              placeholder="Dirección"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="correo">Correo Electrónico:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input
+              type="email"
+              id="correo"
+              name="correo"
+              class="form-control"
+              placeholder="Correo Electrónico"
+              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
+              title="Ingrese un correo electrónico válido"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="asunto">Asunto:</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-tag"></i></span>
+            <input
+              type="text"
+              id="asunto"
+              name="asunto"
+              class="form-control"
+              placeholder="Asunto"
+              pattern="[a-zA-Z ]+"
+              title="Ingrese solo letras y espacios"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="mensaje">Mensaje:</label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            class="form-control"
+            placeholder="Mensaje"
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">
+        Enviar <i class="fas fa-paper-plane"></i>
+      </button>
+    </form>
+
+    <button id="viewContactsBtn" class="btn btn-info btn-block mt-3">
+      Listar Contactos <i class="fas fa-list"></i>
+    </button>
+  </div>
+
+  <div id="contactsTableContainer" class="container mt-4">
+    <table class="table table-striped" id="contactsTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>DNI</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Correo</th>
+          <th>Asunto</th>
+          <th>Mensaje</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be appended here by JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#viewContactsBtn").click(function () {
+          $.get("/contactos", function (data) {
+            const tableBody = $("#contactsTable tbody");
+            tableBody.empty();
+            data.forEach((contact) => {
+              const row = `<tr>
+                    <td>${contact.id}</td>
+                    <td>${contact.nombres}</td>
+                    <td>${contact.apellidos}</td>
+                    <td>${contact.dni}</td>
+                    <td>${contact.telefono}</td>
+                    <td>${contact.direccion}</td>
+                    <td>${contact.correo}</td>
+                    <td>${contact.asunto}</td>
+                    <td>${contact.mensaje}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editContact(${contact.id})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteContact(${contact.id})"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>`;
+              tableBody.append(row);
+            });
+            $("#contactsTableContainer").slideDown();
+          });
+        });
+      });
+
+      function editContact(id) {
+        $.get(`/contactos/${id}`, function (data) {
+          $("#contactForm").attr("action", `/contactos/${id}`);
+          $("#contactForm").attr("method", "put");
+          $("#nombres").val(data.nombres);
+          $("#apellidos").val(data.apellidos);
+          $("#dni").val(data.dni);
+          $("#telefono").val(data.telefono);
+          $("#direccion").val(data.direccion);
+          $("#correo").val(data.correo);
+          $("#asunto").val(data.asunto);
+          $("#mensaje").val(data.mensaje);
+          window.scrollTo(0, 0);
+        });
+      }
+
+      function deleteContact(id) {
+        if (confirm("¿Estás seguro de que deseas eliminar este contacto?")) {
+          $.ajax({
+            url: `/contactos/${id}`,
+            type: "DELETE",
+            success: function (result) {
+              alert("Contacto eliminado");
+              $("#viewContactsBtn").click();
+            },
+          });
+        }
+      }
+
+      $(document).ready(function () {
+        $("#viewContactsBtn").click(function () {
+          $.get("/contactos", function (data) {
+            const tableBody = $("#contactsTable tbody");
+            tableBody.empty();
+            data.forEach((contact) => {
+              const row = `<tr>
+                    <td>${contact.id}</td>
+                    <td>${contact.nombres}</td>
+                    <td>${contact.apellidos}</td>
+                    <td>${contact.dni}</td>
+                    <td>${contact.telefono}</td>
+                    <td>${contact.direccion}</td>
+                    <td>${contact.correo}</td>
+                    <td>${contact.asunto}</td>
+                    <td>${contact.mensaje}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editContact(${contact.id})"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteContact(${contact.id})"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>`;
+              tableBody.append(row);
+            });
+            $("#contactsTableContainer").slideDown();
+          });
+        });
+
+        $("#contactForm").submit(function (event) {
+          event.preventDefault();
+          const form = $(this);
+          const url = form.attr("action");
+          const method = form.attr("method");
+          $.ajax({
+            url: url,
+            type: method,
+            data: form.serialize(),
+            success: function (result) {
+              alert("Contacto guardado");
+              form.trigger("reset");
+              $("#viewContactsBtn").click(); // Actualiza la tabla después de guardar
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
